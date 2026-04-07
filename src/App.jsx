@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "./lib/supabase";
+import supabase from "./lib/supabase";
 import Auth from "./components/Auth";
 
 export default function App() {
@@ -7,13 +7,11 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get current session
     supabase.auth.getSession().then(({ data }) => {
       setUser(data.session?.user ?? null);
       setLoading(false);
     });
 
-    // Listen for login/logout
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
@@ -25,19 +23,14 @@ export default function App() {
     };
   }, []);
 
-  if (loading) return <div style={{ color: "white" }}>Loading...</div>;
+  if (loading) return <div style={{ padding: 40 }}>Loading...</div>;
 
-  if (!user) {
-    return <Auth />;
-  }
+  if (!user) return <Auth />;
 
   return (
-    <div style={{ color: "white", padding: 40 }}>
-      <h1>🔥 YOU ARE LOGGED IN 🔥</h1>
-      <button
-        onClick={() => supabase.auth.signOut()}
-        style={{ marginTop: 20 }}
-      >
+    <div style={{ padding: 40 }}>
+      <h1>🚀 REAL APP LIVE 🚀</h1>
+      <button onClick={() => supabase.auth.signOut()}>
         Logout
       </button>
     </div>
