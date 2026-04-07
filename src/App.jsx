@@ -54,7 +54,19 @@ async function sendMessage() {
 return (
   <div style={{ padding: 20, color: "white", background: "black", minHeight: "100vh" }}>
     <h1>Welcome, {user.email}</h1>
+<div style={{ marginTop: 20 }}>
+  <div><b>assistant:</b> Hello 👋 I’m your AI</div>
+</div>
 
+<div style={{ marginTop: 20 }}>
+  <input
+    placeholder="Type something..."
+    style={{ padding: 10, width: "70%", color: "black" }}
+  />
+  <button style={{ marginLeft: 10 }}>
+    Send
+  </button>
+</div>
     <div style={{ marginTop: 20 }}>
       {messages.map((m, i) => (
         <div key={i}>
